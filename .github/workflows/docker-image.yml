@@ -15,11 +15,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag anandadwipra/laravelalpine:latest
+      run: docker build . --file Dockerfile --tag anandadwipra/laravel-alpine:latest
     - name: Push image to Registry
       env:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
       run: |
         docker login -u $username -p $password
-        docker push anandadwipra/laravelalpine:lataest
+        docker push anandadwipra/laravel-alpine:latest
