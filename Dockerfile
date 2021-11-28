@@ -7,8 +7,6 @@ RUN apk update
 RUN echo "Installing common dependency"
 
 RUN apk add --no-cache zip \
-    unzip \
-    curl \
     supervisor \
     nginx 
 
