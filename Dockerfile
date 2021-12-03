@@ -1,17 +1,11 @@
 FROM alpine:3.14
 
-RUN echo "Update System"
+# Update System and Installing common dependency
 
-RUN apk update
-
-RUN echo "Installing common dependency"
-
-RUN apk add --no-cache zip \
+RUN apk update && apk add --no-cache zip \
     supervisor \
-    nginx 
-
-
-RUN apk add --no-cache php8 \
+    nginx \
+    php8 \
     php8-ctype \
     php8-curl \
     php8-dom \
@@ -33,13 +27,11 @@ RUN apk add --no-cache php8 \
     php8-xmlreader \
     php8-zlib 
 
-RUN echo "Create Sysmlink PHP"
+# Create Sysmlink PHP
 
 RUN ln -s /usr/bin/php8 /usr/bin/php
 
-RUN echo "Preparing Workdir"
-
-RUN mkdir -p /var/www/html
+# Preparing Workdir
 
 WORKDIR /var/www/html
 
