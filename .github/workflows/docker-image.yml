@@ -15,11 +15,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag anandadwipra/laravel-alpine:$short_git_hash
+      run: |
+        short_git_hash=$(git rev-parse --short "$GITHUB_SHA")
+        docker build . --file Dockerfile --tag anandadwipra/laravel-alpine:$short_git_hash
     - name: Push image to Registry
       env:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
       run: |
+        short_git_hash=$(git rev-parse --short "$GITHUB_SHA")
         docker login -u $username -p $password
         docker push anandadwipra/laravel-alpine:$short_git_hash
