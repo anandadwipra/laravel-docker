@@ -39,6 +39,7 @@ WORKDIR /var/www/html
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY ./default.conf /etc/nginx/http.d/default.conf
+COPY ./command.sh /tmp/command.sh
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
 EXPOSE 80
